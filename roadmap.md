@@ -17,3 +17,8 @@
 - [x] Dedicated page: upload photo, expert transcription, both models side by side.
 # 3D presentation motion
 - [x] 3D slide turns, depth entrances for text and cards, drifting photos, spinning Armenian letter rings.
+
+# Talking narrators
+- [x] Narration recordings for all 11 narrated slides.
+- [ ] Talking-picture button on narrated slides: plays the recording with captions and the narrator's video or portrait.
+- [ ] Narrator videos for the scribe, engineer, astronomer, chess coach and chronicler (guide, Mashtots, Shirakatsi done).
