@@ -1,0 +1,79 @@
+[
+ {
+  "capability": "code",
+  "source": "github Haykaz4165d/armenia-ai-illuminated",
+  "outcome": "migrate",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "schema",
+  "source": "drizzle/schema.ts (empty), no supabase/migrations",
+  "outcome": "none",
+  "status": "verified",
+  "next_action": "none - source defines no tables"
+ },
+ {
+  "capability": "records",
+  "source": "no tables",
+  "outcome": "none",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "auth identities",
+  "source": "no sign-in code; Supabase client unused",
+  "outcome": "none",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "authorization",
+  "source": "none",
+  "outcome": "none",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "uploaded file bytes",
+  "source": "images kept in page memory only",
+  "outcome": "none",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "AI manuscript transcription",
+  "source": "@lovable.dev/ai-gateway generateResponse server function",
+  "outcome": "migrate",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "public endpoints/webhooks/schedules",
+  "source": "none",
+  "outcome": "none",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "secrets",
+  "source": "LOVABLE_API_KEY only",
+  "outcome": "migrate",
+  "status": "verified",
+  "next_action": "none - auto-provisioned"
+ },
+ {
+  "capability": "cutover",
+  "source": "",
+  "outcome": "pending",
+  "status": "pending",
+  "next_action": "publish when ready"
+ },
+ {
+  "capability": "verification",
+  "source": "",
+  "outcome": "pending",
+  "status": "verified",
+  "next_action": "none"
+ }
+]

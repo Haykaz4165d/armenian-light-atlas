@@ -153,3 +153,170 @@
     color: var(--color-foreground);
   }
 }
+
+:root {
+  --deck-bg: oklch(0.16 0.02 30);
+  --deck-ink: oklch(0.96 0.02 80);
+  --deck-muted: oklch(0.75 0.03 70);
+  --deck-accent: oklch(0.75 0.15 60);
+  --deck-red: oklch(0.5 0.17 25);
+  --deck-overlay: linear-gradient(90deg, oklch(0.12 0.02 30 / 0.95) 0%, oklch(0.12 0.02 30 / 0.7) 45%, oklch(0.12 0.02 30 / 0.1) 100%);
+  --font-serif-hy: "Noto Serif Armenian", serif;
+  --font-sans-hy: "Noto Sans Armenian", sans-serif;
+}
+.deck-root { background: oklch(0.08 0.01 30); color: var(--deck-ink); font-family: var(--font-sans-hy); }
+.slide-content { width:1920px; height:1080px; position:absolute; left:50%; top:50%; margin-left:-960px; margin-top:-540px; transform-origin:center; overflow:hidden; background:var(--deck-bg); }
+.slide-title-lg { font-family:var(--font-serif-hy); font-size:104px; line-height:1.05; font-weight:700; }
+.slide-title { font-family:var(--font-serif-hy); font-size:76px; line-height:1.1; font-weight:700; }
+.slide-body { font-size:32px; line-height:1.4; color:var(--deck-muted); }
+.slide-kicker { font-size:24px; letter-spacing:0.14em; text-transform:uppercase; color:var(--deck-accent); font-weight:600; }
+.slide-step { font-size:26px; line-height:1.2; font-weight:600; color:var(--deck-ink); overflow-wrap:anywhere; }
+.slide-caption { font-size:24px; line-height:1.3; color:var(--deck-muted); }
+.slide-stat { font-family:var(--font-serif-hy); font-size:96px; color:var(--deck-accent); line-height:1; font-weight:700; }
+.slide-overlay { background: var(--deck-overlay); }
+.slide-card { border-left:6px solid var(--deck-accent); background: oklch(1 0 0 / 0.05); padding:32px 36px; }
+.slide-card-sm { border-left:6px solid var(--deck-accent); background: oklch(1 0 0 / 0.05); padding:18px 26px; }
+.slide-note { font-size:21px; line-height:1.3; color:var(--deck-muted); }
+.slide-figure { border:1px solid oklch(1 0 0 / 0.18); background: oklch(1 0 0 / 0.04); overflow:hidden; }
+.slide-grabar { font-family:var(--font-serif-hy); font-size:27px; line-height:1.4; color:var(--deck-ink); }
+.slide-lowconf { color:var(--deck-red); border-bottom:2px dotted var(--deck-red); }
+.slide-chip { display:inline-block; font-size:20px; line-height:1.2; padding:6px 16px; border:1px solid oklch(1 0 0 / 0.28); border-radius:999px; color:var(--deck-ink); }
+.text-deck-accent { color: var(--deck-accent); }
+.text-deck-ink { color: var(--deck-ink); }
+.deck-btn { background: oklch(1 0 0 / 0.1); color: var(--deck-ink); }
+
+.manuscript-workspace {
+  --background: oklch(0.16 0.02 30);
+  --foreground: oklch(0.96 0.02 80);
+  --primary: oklch(0.78 0.12 65);
+  --primary-foreground: oklch(0.16 0.02 30);
+  --muted: oklch(0.22 0.015 30);
+  --muted-foreground: oklch(0.8 0.015 80);
+  --accent: oklch(0.28 0.02 30);
+  --accent-foreground: oklch(0.96 0.02 80);
+  --border: oklch(0.38 0.015 30);
+  --input: var(--border);
+  --ring: var(--primary);
+  --destructive: oklch(0.78 0.14 25);
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans-hy);
+}
+.font-serif-hy { font-family: var(--font-serif-hy); }
+
+/* ---------- 3D motion for the presentation ---------- */
+.slide-content {
+  background: radial-gradient(ellipse at center, oklch(0.2 0.02 30), oklch(0.08 0.01 30));
+  perspective: 2600px;
+}
+.slide-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--deck-bg);
+  perspective: 1800px;
+  backface-visibility: hidden;
+}
+.slide-enter { animation: slide-in-3d 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.slide-exit { animation: slide-out-3d 0.8s cubic-bezier(0.5, 0, 0.75, 0) both; pointer-events: none; }
+@keyframes slide-in-3d {
+  from { transform: translateX(calc(var(--d, 1) * 38%)) translateZ(-900px) rotateY(calc(var(--d, 1) * -55deg)); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes slide-out-3d {
+  from { transform: none; opacity: 1; }
+  to { transform: translateX(calc(var(--d, 1) * -38%)) translateZ(-900px) rotateY(calc(var(--d, 1) * 55deg)); opacity: 0; }
+}
+
+/* Background photos drift slowly in depth, and shift against the pointer. */
+.slide-face > img {
+  animation: ken-burns 22s ease-in-out infinite alternate;
+  translate: calc(var(--tx, 0) * -28px) calc(var(--ty, 0) * -18px);
+  transition: translate 0.5s ease-out;
+}
+@keyframes ken-burns {
+  from { transform: scale(1.08) rotate(0deg); }
+  to { transform: scale(1.2) translate3d(-2%, -1.5%, 0) rotate(0.6deg); }
+}
+
+/* Content leans toward the pointer. */
+.slide-face > div:not(.slide-overlay) {
+  transform: rotateY(calc(var(--tx, 0) * 5deg)) rotateX(calc(var(--ty, 0) * -4deg));
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-out;
+}
+
+/* Text blocks rise out of depth one after another. */
+.slide-face:not(.slide-exit) > div:not(.slide-overlay, .letter-stage) > * {
+  animation: rise-3d 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation-delay: calc(0.25s + var(--k, 0) * 0.13s);
+}
+.slide-face > div > :nth-child(2) { --k: 1; }
+.slide-face > div > :nth-child(3) { --k: 2; }
+.slide-face > div > :nth-child(4) { --k: 3; }
+.slide-face > div > :nth-child(5) { --k: 4; }
+@keyframes rise-3d {
+  from { transform: translate3d(0, 70px, -260px) rotateX(55deg); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+/* Cards and timeline items flip in like tiles. */
+.slide-face .grid { transform-style: preserve-3d; }
+.slide-face:not(.slide-exit) .grid > * {
+  animation: flip-3d 1s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation-delay: calc(0.55s + var(--c, 0) * 0.14s);
+  transform-origin: left center;
+}
+.slide-face .grid > :nth-child(2) { --c: 1; }
+.slide-face .grid > :nth-child(3) { --c: 2; }
+.slide-face .grid > :nth-child(4) { --c: 3; }
+.slide-face .grid > :nth-child(5) { --c: 4; }
+@keyframes flip-3d {
+  from { transform: rotateY(-85deg) translateZ(-120px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@media (hover: hover) {
+  .slide-face .grid > * { transition: transform 0.4s ease-out, box-shadow 0.4s ease-out; }
+  .slide-face .grid > :hover { transform: translateZ(50px) rotateX(5deg); box-shadow: 0 40px 60px -30px oklch(0 0 0 / 0.7); }
+}
+
+/* Spinning ring of Armenian letters. */
+.letter-stage { position: absolute; perspective: 1500px; }
+.letter-ring {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: ring-spin 30s linear infinite;
+}
+.letter-glyph {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 110px;
+  height: 150px;
+  margin: -75px 0 0 -55px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid oklch(0.75 0.15 60 / 0.45);
+  background: linear-gradient(160deg, oklch(0.3 0.04 50 / 0.75), oklch(0.12 0.02 30 / 0.75));
+  box-shadow: 0 0 40px oklch(0.75 0.15 60 / 0.18) inset;
+  font-family: var(--font-serif-hy);
+  font-size: 88px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--deck-accent);
+  text-shadow: 0 0 24px oklch(0.75 0.15 60 / 0.55);
+}
+.letter-glyph small { font-family: var(--font-sans-hy); font-size: 22px; font-weight: 600; color: var(--deck-ink); text-shadow: none; }
+@keyframes ring-spin {
+  from { transform: rotateX(-12deg) rotateY(0deg); }
+  to { transform: rotateX(-12deg) rotateY(-360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-face, .slide-face *, .letter-ring { animation: none !important; transition: none !important; }
+  .slide-exit { display: none; }
+}
