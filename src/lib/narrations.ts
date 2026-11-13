@@ -7,10 +7,15 @@ import mashtotsVideo from '@/assets/narrator-mashtots.mp4.asset.json';
 import shirakatsiPortrait from '@/assets/narrator-shirakatsi.jpg';
 import shirakatsiVideo from '@/assets/narrator-shirakatsi.mp4.asset.json';
 import scribePortrait from '@/assets/narrator-scribe.jpg';
+import scribeVideo from '@/assets/narrator-scribe.mp4.asset.json';
 import engineerPortrait from '@/assets/narrator-engineer.jpg';
+import engineerVideo from '@/assets/narrator-engineer.mp4.asset.json';
 import astronomerPortrait from '@/assets/narrator-astronomer.jpg';
+import astronomerVideo from '@/assets/narrator-astronomer.mp4.asset.json';
 import chessPortrait from '@/assets/narrator-chess.jpg';
+import chessVideo from '@/assets/narrator-chess.mp4.asset.json';
 import chroniclerPortrait from '@/assets/narrator-chronicler.jpg';
+import chroniclerVideo from '@/assets/narrator-chronicler.mp4.asset.json';
 import titleAudio from '@/assets/narration-title.mp3.asset.json';
 import alphabetAudio from '@/assets/narration-alphabet.mp3.asset.json';
 import shirakatsiAudio from '@/assets/narration-shirakatsi.mp3.asset.json';
@@ -23,17 +28,17 @@ import pauliciansAudio from '@/assets/narration-paulicians.mp3.asset.json';
 import tondrakiansAudio from '@/assets/narration-tondrakians.mp3.asset.json';
 import thanksAudio from '@/assets/narration-thanks.mp3.asset.json';
 
-export type Narrator = { name: string; role: string; portrait: string; video: string | null };
+export type Narrator = { name: string; role: string; portrait: string; video: string };
 
 const narrators = {
   guide: { name: "Ուղեցույց-պատմաբան", role: "Մեր ճանապարհորդության ուղեկիցը", portrait: guidePortrait, video: guideVideo.url },
   mashtots: { name: "Մեսրոպ Մաշտոց", role: "Հայոց այբուբենի ստեղծող · V դար", portrait: mashtotsPortrait, video: mashtotsVideo.url },
   shirakatsi: { name: "Անանիա Շիրակացի", role: "Մաթեմատիկոս և աստղագետ · VII դար", portrait: shirakatsiPortrait, video: shirakatsiVideo.url },
-  scribe: { name: "Գրիչ", role: "Միջնադարյան ձեռագրերի արտագրող", portrait: scribePortrait, video: null },
-  engineer: { name: "Ինժեներ", role: "Երևանի մաթեմատիկական մեքենաների ինստիտուտ", portrait: engineerPortrait, video: null },
-  astronomer: { name: "Աստղագետ", role: "Բյուրականի աստղադիտարան", portrait: astronomerPortrait, video: null },
-  chess: { name: "Շախմատի մարզիչ", role: "Հայկական շախմատի դպրոց", portrait: chessPortrait, video: null },
-  chronicler: { name: "Պատմիչ", role: "Միջնադարյան տարեգիր", portrait: chroniclerPortrait, video: null },
+  scribe: { name: "Գրիչ", role: "Միջնադարյան ձեռագրերի արտագրող", portrait: scribePortrait, video: scribeVideo.url },
+  engineer: { name: "Ինժեներ", role: "Երևանի մաթեմատիկական մեքենաների ինստիտուտ", portrait: engineerPortrait, video: engineerVideo.url },
+  astronomer: { name: "Աստղագետ", role: "Բյուրականի աստղադիտարան", portrait: astronomerPortrait, video: astronomerVideo.url },
+  chess: { name: "Շախմատի մարզիչ", role: "Հայկական շախմատի դպրոց", portrait: chessPortrait, video: chessVideo.url },
+  chronicler: { name: "Պատմիչ", role: "Միջնադարյան տարեգիր", portrait: chroniclerPortrait, video: chroniclerVideo.url },
 } satisfies Record<string, Narrator>;
 
 export type Narration = { narrator: Narrator; text: string; audio: string };
@@ -53,6 +58,12 @@ export const narrations = {
 } satisfies Record<string, Narration>;
 
 export type NarrationId = keyof typeof narrations;
+
+/** Which slide (by position in the deck) each narrator speaks on. */
+export const narratedSlides: Record<number, NarrationId> = {
+  0: 'title', 1: 'alphabet', 2: 'shirakatsi', 3: 'matenadaran', 4: 'computer', 5: 'byurakan',
+  6: 'chess', 8: 'heritage', 9: 'paulicians', 10: 'tondrakians', 19: 'thanks',
+};
 
 /** Splits narration into caption sentences at Armenian and Latin sentence ends. */
 export function sentences(text: string) {

@@ -20,5 +20,5 @@
 
 # Talking narrators
 - [x] Narration recordings for all 11 narrated slides.
-- [ ] Talking-picture button on narrated slides: plays the recording with captions and the narrator's video or portrait.
-- [ ] Narrator videos for the scribe, engineer, astronomer, chess coach and chronicler (guide, Mashtots, Shirakatsi done).
+- [x] Talking-picture button on narrated slides: plays the recording with captions and the narrator's video or portrait.
+- [x] Narrator videos for all 8 narrators (astronomer portrait redrawn as a fictional person after the video service blocked a real-looking face).

@@ -9,6 +9,8 @@ import shirakatsi from "@/assets/shirakatsi.jpg";
 import byurakan from "@/assets/byurakan.jpg";
 import chess from "@/assets/chess.jpg";
 import manuscriptPage from "@/assets/manuscript-page.jpg";
+import { TalkingNarrator } from "@/components/talking-narrator";
+import { narratedSlides } from "@/lib/narrations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -360,7 +362,10 @@ function Deck() {
               {slides[prev]}
             </div>
           )}
-          <div key={`in-${i}`} className={`slide-face${prev >= 0 ? " slide-enter" : ""}`}>{slides[i]}</div>
+          <div key={`in-${i}`} className={`slide-face${prev >= 0 ? " slide-enter" : ""}`}>
+            {slides[i]}
+            {narratedSlides[i] && <TalkingNarrator id={narratedSlides[i]} />}
+          </div>
         </div>
       </div>
       <div className="flex items-center justify-center gap-4 p-3 text-sm">
